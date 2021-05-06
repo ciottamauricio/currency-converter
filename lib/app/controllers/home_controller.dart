@@ -17,7 +17,7 @@ class HomeController {
   }
 
   void convert() {
-    double value = double.tryParse(toText.text) ?? 1;
+    double value = double.tryParse((toText.text).replaceAll(",", ".")) ?? 1;
     double currencyMultiplier = toCurrency.dolar;
 
     switch (fromCurrency.name) {

@@ -9,6 +9,12 @@ main() {
 
   final homeController = HomeController(toText: toText, fromText: fromText);
 
+  test('deve converter de real para dolar com vírgula', () {
+    toText.text = '2,0';
+    homeController.convert();
+    expect(fromText.text, '0.36');
+  });
+
   test('deve converter de real para dolar', () {
     toText.text = '2.0';
     homeController.convert();
@@ -16,20 +22,20 @@ main() {
   });
 
   test('deve converter de dolar para real', () {
-    toText.text = '2.0';
-    homeController.toCurrency = homeController.fromCurrency = CurrencyModel(
+    toText.text = '1.0';    
+    homeController.fromCurrency = homeController.fromCurrency = CurrencyModel(
       name: 'Real',
       real: 1.0,
       dolar: 0.18,
-      euro: 0.15,
+      euro: 0.15,      
     );
-    homeController.fromCurrency = CurrencyModel(
+    homeController.toCurrency = CurrencyModel(
       name: 'Dolar',
       real: 5.65,
       dolar: 1.0,
       euro: 0.85,
     );
     homeController.convert();
-    expect(fromText.text, '0.36');
+    expect(fromText.text, '5.65');
   });
 }
